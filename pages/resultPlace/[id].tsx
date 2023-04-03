@@ -6,8 +6,9 @@ import GetMbtiPlace, { ResultPlaceI, RESULT_PLACE } from "@/lib/get-mbti-place"
 import { GetStaticProps } from "next"
 import { addDocument, getDocument } from "@/lib/firestore"
 import Link from "next/link"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { resetType } from "@/redux/typeSlice"
+import { AppState } from "@/redux/store"
 
 export const getStaticPaths = async () => {
   const paths = RESULT_PLACE.map((props) => {
@@ -25,21 +26,6 @@ export const getStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const res = GetMbtiPlace(String(params?.id))
 
-  const month = new Date().getMonth() + 1
-  const date = new Date().getDate()
-  const currentDate = month + "-" + date
-
-  const handleClick = async () => {
-    const prevData = await getDocument(currentDate, res.id)
-    if (prevData) {
-      await addDocument(currentDate, res.id, prevData + 1)
-    } else {
-      await addDocument(currentDate, res.id, 1)
-    }
-  }
-
-  handleClick()
-
   return {
     props: {
       place: res,
@@ -50,9 +36,23 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 const ResultPlace = ({ pageProps }: { pageProps: { place: ResultPlaceI } }) => {
   const { place } = pageProps
   const dispatch = useDispatch()
+  const mbti = useSelector((state: AppState) => state.types.type).join("")
+  const month = new Date().getMonth() + 1
+  const date = new Date().getDate()
+  const currentDate = month + "-" + date
+
+  const handleClick = async () => {
+    const prevData = await getDocument(currentDate, mbti)
+    if (prevData) {
+      await addDocument(currentDate, mbti, prevData + 1)
+    } else {
+      await addDocument(currentDate, mbti, 1)
+    }
+  }
 
   useEffect(() => {
     dispatch(resetType())
+    handleClick()
   }, [])
 
   return (
