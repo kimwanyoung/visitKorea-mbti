@@ -59,7 +59,7 @@ const ResultPlace = () => {
   return (
     <>
       <PlaceWrapper>
-        <Image src={res.image} alt="결과 페이지" fill priority quality={100} />
+        <Image src={res?.image} alt="결과 페이지" fill priority quality={100} />
         <ButtonWrapper href="/" onClick={() => handleClick()}>
           <Image
             src="/images/logo/completeBtn.svg"
