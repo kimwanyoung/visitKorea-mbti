@@ -1,5 +1,6 @@
 import { QuestionI } from "@/interface/question"
 import { ResultI } from "@/lib/get-mbti"
+import { ResultPlaceI } from "@/lib/get-mbti-place"
 import Image from "next/image"
 import React from "react"
 const TYPES: ResultI[] = [
@@ -199,6 +200,73 @@ const questionList: QuestionI[] = [
   },
 ]
 
+export const RESULT_PLACE: ResultPlaceI[] = [
+  {
+    id: "ESTP",
+    image: "/images/place/estp.png",
+  },
+  {
+    id: "ENFJ",
+    image: "/images/place/enfj.png",
+  },
+  {
+    id: "ENFP",
+    image: "/images/place/enfp.png",
+  },
+  {
+    id: "ENTJ",
+    image: "/images/place/entj.png",
+  },
+  {
+    id: "ENTP",
+    image: "/images/place/entp.png",
+  },
+  {
+    id: "ESFJ",
+    image: "/images/place/esfj.png",
+  },
+  {
+    id: "ESFP",
+    image: "/images/place/esfp.png",
+  },
+  {
+    id: "ESTJ",
+    image: "/images/place/estj.png",
+  },
+  {
+    id: "INFJ",
+    image: "/images/place/infj.png",
+  },
+  {
+    id: "INFP",
+    image: "/images/place/infp.png",
+  },
+  {
+    id: "INTJ",
+    image: "/images/place/intj.png",
+  },
+  {
+    id: "INTP",
+    image: "/images/place/intp.png",
+  },
+  {
+    id: "ISFJ",
+    image: "/images/place/isfj.png",
+  },
+  {
+    id: "ISFP",
+    image: "/images/place/isfp.png",
+  },
+  {
+    id: "ISTJ",
+    image: "/images/place/istj.png",
+  },
+  {
+    id: "ISTP",
+    image: "/images/place/istp.png",
+  },
+]
+
 const ImageLoader = () => {
   return (
     <div style={{ display: "none" }}>
@@ -236,6 +304,16 @@ const ImageLoader = () => {
         <Image
           key={prop.types[1].image}
           src={prop.types[1].image}
+          width={1}
+          height={1}
+          alt="main-background"
+          priority
+        />
+      ))}
+      {RESULT_PLACE.map((prop) => (
+        <Image
+          key={prop.id}
+          src={prop.image}
           width={1}
           height={1}
           alt="main-background"
