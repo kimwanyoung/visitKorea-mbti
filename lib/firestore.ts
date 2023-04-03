@@ -40,7 +40,7 @@ export const addTotal = async (collectionName: string) => {
     const mbtiRef = collection(db, collectionName)
     const q = query(mbtiRef)
     const snapShot = await getDocs(q)
-    let sum = prevData ? Number(prevData) : 0
+    let sum = 0
     snapShot.forEach((doc) => {
       sum += Number(doc.data().data)
     })
