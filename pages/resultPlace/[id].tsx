@@ -1,20 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import styled from "@emotion/styled"
 import Image from "next/image"
-import React, { FormEvent, useEffect } from "react"
+import React, { useEffect } from "react"
 import GetMbtiPlace, { ResultPlaceI, RESULT_PLACE } from "@/lib/get-mbti-place"
 import { GetStaticProps } from "next"
-import { useSelector } from "react-redux"
-import { AppState } from "@/redux/store"
-import { db } from "../../firebase/firebase"
-import {
-  addDoc,
-  collection,
-  doc,
-  getFirestore,
-  setDoc,
-} from "firebase/firestore"
 import { addDocument, getDocument } from "@/lib/firestore"
 import Link from "next/link"
+import { useDispatch } from "react-redux"
+import { resetType } from "@/redux/typeSlice"
 
 export const getStaticPaths = async () => {
   const paths = RESULT_PLACE.map((props) => {
@@ -56,7 +49,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 const ResultPlace = ({ pageProps }: { pageProps: { place: ResultPlaceI } }) => {
   const { place } = pageProps
-  const mbti = useSelector((state: AppState) => state.types.type).join("")
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(resetType())
+  }, [])
 
   return (
     <>
@@ -68,8 +65,16 @@ const ResultPlace = ({ pageProps }: { pageProps: { place: ResultPlaceI } }) => {
           priority
           quality={100}
         />
+        <ButtonWrapper href="/">
+          <Image
+            src="/images/logo/completeBtn.svg"
+            alt="완료 버튼"
+            width={400}
+            height={300}
+            priority
+          />
+        </ButtonWrapper>
       </PlaceWrapper>
-      <Link href="/">link</Link>
     </>
   )
 }
@@ -84,4 +89,14 @@ const PlaceWrapper = styled.section`
   align-items: center;
   justify-content: center;
   overflow: scroll;
+`
+
+const ButtonWrapper = styled(Link)`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 0;
+  width: 100%;
+  z-index: 23;
 `

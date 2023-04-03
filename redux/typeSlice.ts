@@ -28,6 +28,9 @@ const typeSlice = createSlice({
         return
       }
     },
+    resetType(state, action?: PayloadAction) {
+      state.type = []
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(HYDRATE, (state, action: any) => {
@@ -39,5 +42,5 @@ const typeSlice = createSlice({
   },
 })
 
-export const { addType } = typeSlice.actions
+export const { addType, resetType } = typeSlice.actions
 export default typeSlice.reducer
