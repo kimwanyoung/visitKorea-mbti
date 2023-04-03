@@ -88,7 +88,17 @@ const Form = ({ pageProps }: { pageProps: { result: QuestionI } }) => {
                 quality={30}
               />
             </CheckImage>
-            <ImageWrapper>
+            <ImageWrapper
+              onClick={() => {
+                dispatch(
+                  addType({
+                    value: result.types[0].type,
+                    index: result.id,
+                  })
+                )
+                loadingRoutes(Number(id))
+              }}
+            >
               <Image
                 src={result.types[0].image}
                 width={200}
@@ -123,7 +133,17 @@ const Form = ({ pageProps }: { pageProps: { result: QuestionI } }) => {
                 quality={30}
               />
             </CheckImage>
-            <ImageWrapper>
+            <ImageWrapper
+              onClick={() => {
+                dispatch(
+                  addType({
+                    value: result.types[1].type,
+                    index: result.id,
+                  })
+                )
+                loadingRoutes(Number(id))
+              }}
+            >
               <Image
                 src={result.types[1].image}
                 width={200}
