@@ -5,7 +5,6 @@ import React from "react"
 import { ArrowRightCircle } from "emotion-icons/bootstrap"
 import Marquee from "react-fast-marquee"
 import Link from "next/link"
-import ImageLoader from "@/components/imageLoad/ImageLoader"
 
 const PLACE_LIST = [
   "충청남도 서천군",
@@ -49,7 +48,6 @@ export default function Home() {
         <title>생태녹생관광</title>
       </Head>
       <MainWrapper>
-        <ImageLoader />
         <LogoWrapper>
           <Image
             src="/images/logo/logo2.png"

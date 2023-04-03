@@ -81,12 +81,6 @@ const MbtiResult = ({
 
   return (
     <MainWrapper>
-      <Image
-        src={`/images/place/${mbti.toLowerCase()}.png`}
-        alt="결과 페이지"
-        fill
-        priority
-      />
       <Image src={result.resultImage} fill alt="main-background" priority />
       <TitleWrapper>
         <TextWrapper>
