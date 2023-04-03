@@ -1,4 +1,4 @@
-import { initializeApp, getApp } from "firebase/app"
+import { initializeApp, getApp, getApps } from "firebase/app"
 import { getFirestore } from "firebase/firestore"
 
 const firebaseConfig = {
@@ -10,11 +10,10 @@ const firebaseConfig = {
   appId: process.env.APP_ID,
   measurementId: process.env.MEASUREMENT_ID,
 }
-let app
-if (!getApp.length) {
-  const app = initializeApp(firebaseConfig)
-}
+let firebase_app =
+  getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0]
+
 // Initialize Cloud Firestore and get a reference to the service
-const db = getFirestore(app)
+const db = getFirestore(firebase_app)
 
 export { db }

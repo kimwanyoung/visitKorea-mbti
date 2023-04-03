@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+"use client"
 import styled from "@emotion/styled"
 import Image from "next/image"
 import React, { useEffect } from "react"
@@ -9,65 +10,56 @@ import Link from "next/link"
 import { useDispatch, useSelector } from "react-redux"
 import { resetType } from "@/redux/typeSlice"
 import { AppState } from "@/redux/store"
-import { db } from "@/firebase/firebase"
+// export const getStaticPaths = async () => {
+//   const paths = RESULT_PLACE.map((props) => {
+//     return {
+//       params: { id: props.id },
+//     }
+//   })
 
-export const getStaticPaths = async () => {
-  const paths = RESULT_PLACE.map((props) => {
-    return {
-      params: { id: props.id },
-    }
-  })
+//   return {
+//     paths,
+//     fallback: false,
+//   }
+// }
 
-  return {
-    paths,
-    fallback: false,
-  }
-}
+// export const getStaticProps: GetStaticProps = async ({ params }) => {
+//   const res = GetMbtiPlace(String(params?.id))
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const res = GetMbtiPlace(String(params?.id))
+//   return {
+//     props: {
+//       place: res,
+//     },
+//   }
+// }
 
-  return {
-    props: {
-      place: res,
-    },
-  }
-}
-
-const ResultPlace = ({ pageProps }: { pageProps: { place: ResultPlaceI } }) => {
-  const { place } = pageProps
+const ResultPlace = () => {
   const dispatch = useDispatch()
   const mbti = useSelector((state: AppState) => state.types.type).join("")
   const month = new Date().getMonth() + 1
   const date = new Date().getDate()
   const currentDate = month + "-" + date
+  const res = GetMbtiPlace(String(mbti))
 
   const handleClick = async () => {
     const prevData = await getDocument(currentDate, mbti)
     if (prevData) {
       await addDocument(currentDate, mbti, prevData + 1)
+      dispatch(resetType())
     } else {
       await addDocument(currentDate, mbti, 1)
     }
   }
 
   useEffect(() => {
-    dispatch(resetType())
-    handleClick()
-    addTotal(currentDate)
+    // handleClick()
   }, [])
 
   return (
     <>
       <PlaceWrapper>
-        <Image
-          src={place.image}
-          alt="결과 페이지"
-          fill
-          priority
-          quality={100}
-        />
-        <ButtonWrapper href="/">
+        <Image src={res.image} alt="결과 페이지" fill priority quality={100} />
+        <ButtonWrapper href="/" onClick={() => handleClick()}>
           <Image
             src="/images/logo/completeBtn.svg"
             alt="완료 버튼"
