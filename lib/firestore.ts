@@ -44,7 +44,7 @@ export const addTotal = async (collectionName: string) => {
       sum += doc.data().data
     })
     await setDoc(doc(collection(db, collectionName), "total"), {
-      sum,
+      data: sum,
     })
   } catch (err) {
     console.error(err)
