@@ -44,9 +44,16 @@ export const addTotal = async (collectionName: string) => {
     snapShot.forEach((doc) => {
       sum += Number(doc.data().data)
     })
-    await setDoc(doc(collection(db, collectionName), "total"), {
-      data: sum,
-    })
+    if (prevData) {
+      await setDoc(doc(collection(db, collectionName), "total"), {
+        data: sum - prevData,
+      })
+    } else {
+      await setDoc(doc(collection(db, collectionName), "total"), {
+        data: sum,
+      })
+    }
+    
   } catch (err) {
     console.error(err)
   }
