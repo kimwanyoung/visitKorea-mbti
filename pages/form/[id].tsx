@@ -11,6 +11,7 @@ import Modal from "@/components/modal/Modal"
 import { Dot, DotFill } from "@emotion-icons/octicons"
 import { GetStaticPaths, GetStaticProps } from "next"
 import GetMbtiQuestion from "@/lib/get-mbti-form"
+import { ArrowLeft } from "@emotion-icons/feather"
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -58,8 +59,23 @@ const Form = ({ pageProps }: { pageProps: { result: QuestionI } }) => {
     return <div></div>
   }
 
+  const backRoutes = (param: number) => {
+    if (param === 0) {
+      router.push("/")
+    } else {
+      router.push(`/form/${param - 1}`)
+    }
+  }
+
   return (
     <QuestionWrapper>
+      <ButtonWrapper
+        onClick={() => {
+          backRoutes(Number(id))
+        }}
+      >
+        <ArrowLeft width={50} height={50} color="white" />
+      </ButtonWrapper>
       <Image src={result.background} alt="배경화면" fill priority />
       <ContentWrapper>
         <Title>{result.title}</Title>
@@ -234,4 +250,13 @@ const CheckImage = styled.div`
   width: 4rem;
   height: 4rem;
   margin-bottom: 1rem;
+`
+
+const ButtonWrapper = styled.div`
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  top: 46%;
+  left: 3rem;
+  z-index: 3;
 `
