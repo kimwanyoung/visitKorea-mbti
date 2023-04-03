@@ -45,31 +45,33 @@ const PLACE_LIST = [
   "·",
 ]
 
-// export const getStaticPaths = async () => {
-//   const paths = GetMbtiTypes()
-//   const pathsArr = paths.map((prop) => {
-//     return { params: { id: prop } }
-//   })
-//   return {
-//     paths: pathsArr,
-//     fallback: false,
-//   }
-// }
+export const getStaticPaths = async () => {
+  const paths = GetMbtiTypes()
+  const pathsArr = paths.map((prop) => {
+    return { params: { id: prop } }
+  })
+  return {
+    paths: pathsArr,
+    fallback: false,
+  }
+}
 
-// export const getStaticProps: GetStaticProps = async ({ params }) => {
-//   const data = GetMbtiTypes(String(params?.id))
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const data = GetMbtiTypes(String(params?.id))
 
-//   return {
-//     props: {
-//       result: data,
-//     },
-//   }
-// }
+  return {
+    props: {
+      result: data,
+    },
+  }
+}
 
-const MbtiResult = () => {
+const MbtiResult = ({
+  pageProps,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter()
   const mbti = useSelector((state: AppState) => state.types.type.join(""))
-  const data = GetMbtiTypes(String(mbti))!
+  const result = pageProps.result[0]
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -80,7 +82,7 @@ const MbtiResult = () => {
 
   return (
     <MainWrapper>
-      <Image src={data[0].image} fill alt="main-background" priority />
+      <Image src={result.resultImage} fill alt="main-background" priority />
       <TitleWrapper>
         <TextWrapper>
           <h1>{mbti} 당신에게 어울리는 생태녹색 관광지는···</h1>

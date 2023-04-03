@@ -36,12 +36,13 @@ export const getDocument = async (collectionName: string, type: string) => {
 
 export const addTotal = async (collectionName: string) => {
   try {
+    const prevData = await getDocument(collectionName, "total")
     const mbtiRef = collection(db, collectionName)
     const q = query(mbtiRef)
     const snapShot = await getDocs(q)
-    let sum = 0
+    let sum = prevData ? Number(prevData) : 0
     snapShot.forEach((doc) => {
-      sum += doc.data().data
+      sum += Number(doc.data().data)
     })
     await setDoc(doc(collection(db, collectionName), "total"), {
       data: sum,

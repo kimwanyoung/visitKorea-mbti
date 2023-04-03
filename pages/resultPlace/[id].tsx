@@ -45,6 +45,7 @@ const ResultPlace = () => {
     const prevData = await getDocument(currentDate, mbti)
     if (prevData) {
       await addDocument(currentDate, mbti, prevData + 1)
+      await addTotal(currentDate)
       dispatch(resetType())
     } else {
       await addDocument(currentDate, mbti, 1)
