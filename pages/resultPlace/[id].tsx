@@ -53,8 +53,8 @@ const ResultPlace = ({ pageProps }: { pageProps: { place: ResultPlaceI } }) => {
 
   useEffect(() => {
     dispatch(resetType())
-    // handleClick()
-    // addTotal(currentDate)
+    handleClick()
+    addTotal(currentDate)
   }, [])
 
   return (
