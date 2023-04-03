@@ -6,6 +6,7 @@ import { ArrowRightCircle } from "emotion-icons/bootstrap"
 import Marquee from "react-fast-marquee"
 import Link from "next/link"
 import ImageLoader from "@/components/imageLoad/ImageLoader"
+import { addTotal } from "@/lib/firestore"
 
 const PLACE_LIST = [
   "충청남도 서천군",

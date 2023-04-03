@@ -4,11 +4,12 @@ import Image from "next/image"
 import React, { useEffect } from "react"
 import GetMbtiPlace, { ResultPlaceI, RESULT_PLACE } from "@/lib/get-mbti-place"
 import { GetStaticProps } from "next"
-import { addDocument, getDocument } from "@/lib/firestore"
+import { addDocument, addTotal, getDocument } from "@/lib/firestore"
 import Link from "next/link"
 import { useDispatch, useSelector } from "react-redux"
 import { resetType } from "@/redux/typeSlice"
 import { AppState } from "@/redux/store"
+import { db } from "@/firebase/firebase"
 
 export const getStaticPaths = async () => {
   const paths = RESULT_PLACE.map((props) => {
@@ -53,6 +54,7 @@ const ResultPlace = ({ pageProps }: { pageProps: { place: ResultPlaceI } }) => {
   useEffect(() => {
     dispatch(resetType())
     handleClick()
+    addTotal(currentDate)
   }, [])
 
   return (

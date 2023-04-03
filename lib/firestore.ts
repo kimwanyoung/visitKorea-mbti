@@ -1,4 +1,12 @@
-import { collection, doc, getDoc, setDoc } from "firebase/firestore"
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore"
 import { db } from "../firebase/firebase"
 
 export const addDocument = async (
@@ -6,12 +14,10 @@ export const addDocument = async (
   type: string,
   data: any
 ) => {
-  // const citiesRef = collection(db, "mbti")
   try {
     const docRef = await setDoc(doc(collection(db, collectionName), type), {
       data,
     })
-    // console.log("Document written with ID: ", docRef.id)
   } catch (err) {
     console.log(err)
   }
@@ -25,5 +31,22 @@ export const getDocument = async (collectionName: string, type: string) => {
     return Number(docSnap.data().data)
   } else {
     return undefined
+  }
+}
+
+export const addTotal = async (collectionName: string) => {
+  try {
+    const mbtiRef = collection(db, collectionName)
+    const q = query(mbtiRef)
+    const snapShot = await getDocs(q)
+    let sum = 0
+    snapShot.forEach((doc) => {
+      sum += doc.data().data
+    })
+    await setDoc(doc(collection(db, collectionName), "total"), {
+      sum,
+    })
+  } catch (err) {
+    console.error(err)
   }
 }
