@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-"use client"
 import styled from "@emotion/styled"
 import Image from "next/image"
 import React, { useEffect } from "react"
@@ -10,6 +9,7 @@ import Link from "next/link"
 import { useDispatch, useSelector } from "react-redux"
 import { resetType } from "@/redux/typeSlice"
 import { AppState } from "@/redux/store"
+import { useRouter } from "next/router"
 export const getStaticPaths = async () => {
   const paths = RESULT_PLACE.map((props) => {
     return {
@@ -37,7 +37,9 @@ const ResultPlace = ({
   pageProps,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const dispatch = useDispatch()
+  const router = useRouter()
   const mbti = useSelector((state: AppState) => state.types.type).join("")
+
   const month = new Date().getMonth() + 1
   const date = new Date().getDate()
   const currentDate = month + "-" + date
@@ -49,6 +51,7 @@ const ResultPlace = ({
       await addDocument(currentDate, mbti, prevData + 1)
       await addTotal(currentDate)
       dispatch(resetType())
+      router.push("/")
     } else {
       await addDocument(currentDate, mbti, 1)
     }
@@ -58,7 +61,7 @@ const ResultPlace = ({
     <>
       <PlaceWrapper>
         <Image src={res.image} alt="결과 페이지" fill priority quality={100} />
-        <ButtonWrapper href="/" onClick={() => handleClick()}>
+        <ButtonWrapper onClick={() => handleClick()}>
           <Image
             src="/images/logo/completeBtn.svg"
             alt="완료 버튼"
@@ -84,7 +87,7 @@ const PlaceWrapper = styled.section`
   overflow: scroll;
 `
 
-const ButtonWrapper = styled(Link)`
+const ButtonWrapper = styled.div`
   position: absolute;
   display: flex;
   align-items: center;
