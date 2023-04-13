@@ -58,19 +58,29 @@ const ResultPlace = ({
     } else {
       await addDocument(currentDate, mbti, 1)
     }
-    dispatch(resetType())
+    // dispatch(resetType())
   }
 
   return (
     <>
       {loading && (
         <ModalWrapper>
-          <LoaderAlt width={70} color="white" />
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection: "column",
+            }}
+          >
+            <LoaderAlt width={70} color="white" />
+            <p style={{ color: "white" }}>결과 집계 중입니다.</p>
+          </div>
         </ModalWrapper>
       )}
       <PlaceWrapper>
         <Image src={res.image} alt="결과 페이지" fill priority quality={100} />
-        <ButtonWrapper onClick={() => handleClick()}>
+        <ButtonWrapper onClick={handleClick}>
           <Image
             src="/images/logo/completeBtn.svg"
             alt="완료 버튼"
