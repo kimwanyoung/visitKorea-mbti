@@ -46,7 +46,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>생태녹생관광</title>
+        <title>생태녹색관광</title>
       </Head>
       <MainWrapper>
         <ImageLoader />
