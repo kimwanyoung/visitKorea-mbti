@@ -50,11 +50,11 @@ const ResultPlace = ({
     if (prevData) {
       await addDocument(currentDate, mbti, prevData + 1)
       await addTotal(currentDate)
-      dispatch(resetType())
       router.push("/")
     } else {
       await addDocument(currentDate, mbti, 1)
     }
+    dispatch(resetType())
   }
 
   return (
