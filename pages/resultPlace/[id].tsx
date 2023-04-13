@@ -58,7 +58,7 @@ const ResultPlace = ({
     } else {
       await addDocument(currentDate, mbti, 1)
     }
-    // dispatch(resetType())
+    dispatch(resetType())
   }
 
   return (
