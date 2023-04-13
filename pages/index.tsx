@@ -69,7 +69,7 @@ export default function Home() {
         <Image src="/images/png/main.png" fill alt="main-background" priority />
         <TitleWrapper>
           <TextWrapper>
-            <h1>당신의 MBTI 맞춤 생태녹생관광지는?</h1>
+            <h1>당신의 MBTI 맞춤 생태녹색관광지는?</h1>
             <h2>
               바쁜 도심 속 지쳤던 몸과 마음을 위로받는 생태 녹색 관광, 나에게 꼭
               맞는 여행지로 함께 떠나요.
