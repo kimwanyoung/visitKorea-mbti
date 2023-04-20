@@ -1,14 +1,15 @@
 import { initializeApp, getApp, getApps } from "firebase/app"
 import { getFirestore } from "firebase/firestore"
 
+const env = process.env
 const firebaseConfig = {
-  apiKey: "AIzaSyCmR9f6RuKR7Q3lV3wjKe7fiySF_MnnMHM",
-  authDomain: "mbti-1eef2.firebaseapp.com",
-  projectId: "mbti-1eef2",
-  storageBucket: "mbti-1eef2.appspot.com",
-  messagingSenderId: "164826534194",
-  appId: "1:164826534194:web:7d3178538b5a5b821a872b",
-  measurementId: "G-CY037QQ6C8",
+  apiKey: env.API_KET,
+  authDomain: env.AUTH_DOMAIN,
+  projectId: env.PROJECT_ID,
+  storageBucket: env.STORAGE_BUCKET,
+  messagingSenderId: env.MESSAGING_SENDER_ID,
+  appId: env.APP_ID,
+  measurementId: env.MEASUREMENT_ID,
 }
 
 let firebase_app =
