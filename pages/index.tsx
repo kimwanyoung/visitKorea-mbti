@@ -5,42 +5,7 @@ import React from "react"
 import { ArrowRightCircle } from "emotion-icons/bootstrap"
 import Marquee from "react-fast-marquee"
 import Link from "next/link"
-import ImageLoader from "@/components/imageLoad/ImageLoader"
-
-const PLACE_LIST = [
-  "충청남도 서천군",
-  "·",
-  "충청북도 제천시",
-  "·",
-  "전라남도 여수시",
-  "·",
-  "전라남도 보성군",
-  "·",
-  "대구광역시 달서구",
-  "·",
-  "부산광역시 북구",
-  "·",
-  "강원도 강릉시",
-  "·",
-  "전라북도 남원시",
-  "·",
-  "경상남도 밀양시",
-  "·",
-  "경기도 연천군",
-  "·",
-  "경상남도 고성군",
-  "·",
-  "경상남도 창원시",
-  "·",
-  "경상북도 문경시",
-  "·",
-  "경기도 고양시",
-  "·",
-  "경상북도 포항시",
-  "·",
-  "전라남도 장성군",
-  "·",
-]
+import { PLACE_LIST } from "@/mocks/mockData"
 
 export default function Home() {
   return (
@@ -49,7 +14,6 @@ export default function Home() {
         <title>생태녹색관광</title>
       </Head>
       <MainWrapper>
-        <ImageLoader />
         <LogoWrapper>
           <Image
             src="/images/logo/logo2.png"

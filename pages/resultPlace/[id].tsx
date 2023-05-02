@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import styled from "@emotion/styled"
 import Image from "next/image"
-import React, { useEffect, useState } from "react"
-import GetMbtiPlace, { ResultPlaceI, RESULT_PLACE } from "@/lib/get-mbti-place"
+import React, { useState } from "react"
+import GetMbtiPlace, { RESULT_PLACE } from "@/lib/get-mbti-place"
 import { GetStaticProps, InferGetStaticPropsType } from "next"
 import { addDocument, addTotal, getDocument } from "@/lib/firestore"
-import Link from "next/link"
 import { useDispatch, useSelector } from "react-redux"
 import { resetType } from "@/redux/typeSlice"
 import { AppState } from "@/redux/store"
 import { useRouter } from "next/router"
 import { LoaderAlt } from "@emotion-icons/boxicons-regular"
+
 export const getStaticPaths = async () => {
   const paths = RESULT_PLACE.map((props) => {
     return {

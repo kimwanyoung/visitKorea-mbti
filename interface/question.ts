@@ -1,5 +1,3 @@
-import { ReactElement } from "react"
-
 export interface mbitI {
   type: string
   iconImage: string
