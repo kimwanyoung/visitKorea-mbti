@@ -32,10 +32,6 @@ const Result = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const result = pageProps.result[0]
 
-  if (!result) {
-    return <ResultWrapper></ResultWrapper>
-  }
-
   return (
     <ResultWrapper>
       <Image src={result.image} alt="결과 배경 이미지" fill priority />

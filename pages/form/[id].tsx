@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { QuestionI } from "@/interface/question"
 import { useRouter } from "next/router"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import styled from "@emotion/styled"
 import Image from "next/image"
 import { useDispatch, useSelector } from "react-redux"
@@ -33,19 +33,19 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 }
 
 const Form = ({ pageProps }: { pageProps: { result: QuestionI } }) => {
+  const { result } = pageProps
+
   const router = useRouter()
-  const dispatch = useDispatch()
   const { id } = router.query
+
+  const dispatch = useDispatch()
   const currentType = useSelector(
     (state: AppState) => state.types.type[Number(id)]
   )
   const type = useSelector((state: AppState) => state.types.type)
-  const { result } = pageProps
+
   const [isClicked, setIsClicked] = useState(false)
 
-  if (type.length === 4) {
-    router.push(`/typeResult/${type.join("")}`)
-  }
   const loadingRoutes = (param: number) => {
     if (param === 3) return
     setIsClicked(true)
@@ -53,10 +53,6 @@ const Form = ({ pageProps }: { pageProps: { result: QuestionI } }) => {
       router.push(`/form/${Number(param) + 1}`)
       setIsClicked(false)
     }, 1500)
-  }
-
-  if (!result || !id) {
-    return <div></div>
   }
 
   const backRoutes = (param: number) => {
@@ -67,6 +63,12 @@ const Form = ({ pageProps }: { pageProps: { result: QuestionI } }) => {
     }
   }
 
+  useEffect(() => {
+    if (type.length === 4) {
+      router.push(`/typeResult/${type.join("")}`)
+    }
+  }, [type])
+
   return (
     <QuestionWrapper>
       <ButtonWrapper
@@ -76,7 +78,14 @@ const Form = ({ pageProps }: { pageProps: { result: QuestionI } }) => {
       >
         <ArrowLeft width={50} height={50} color="white" />
       </ButtonWrapper>
-      <Image src={result.background} alt="배경화면" fill priority />
+      <Image
+        src={result.background}
+        alt="배경화면"
+        fill
+        priority
+        quality={50}
+        blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO8Xw8AAkMBYCz7bH0AAAAASUVORK5CYII="
+      />
       <ContentWrapper>
         <Title>{result.title}</Title>
         <AnswerWrapper>

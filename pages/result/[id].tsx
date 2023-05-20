@@ -48,7 +48,13 @@ const MbtiResult = ({
 
   return (
     <MainWrapper>
-      <Image src={result.resultImage} fill alt="main-background" priority />
+      <Image
+        src={result.resultImage}
+        fill
+        alt="main-background"
+        priority
+        blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO8Xw8AAkMBYCz7bH0AAAAASUVORK5CYII="
+      />
       <TitleWrapper>
         <TextWrapper>
           <h1>{mbti} 당신에게 어울리는 생태녹색 관광지는···</h1>

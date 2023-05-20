@@ -37,18 +37,21 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 const ResultPlace = ({
   pageProps,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const dispatch = useDispatch()
   const router = useRouter()
+  const dispatch = useDispatch()
   const mbti = useSelector((state: AppState) => state.types.type).join("")
+
   const [loading, setLoading] = useState(false)
 
-  const month = new Date().getMonth() + 1
-  const date = new Date().getDate()
-  const currentDate = month + "-" + date
   const res = pageProps.place
 
   const handleClick = async () => {
     setLoading(true)
+
+    const month = new Date().getMonth() + 1
+    const date = new Date().getDate()
+    const currentDate = month + "-" + date
+
     const prevData = await getDocument(currentDate, mbti)
     if (prevData) {
       await addDocument(currentDate, mbti, prevData + 1)
@@ -79,7 +82,13 @@ const ResultPlace = ({
         </ModalWrapper>
       )}
       <PlaceWrapper>
-        <Image src={res.image} alt="결과 페이지" fill priority quality={100} />
+        <Image
+          src={res.image}
+          alt="결과 페이지"
+          fill
+          priority
+          blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO8Xw8AAkMBYCz7bH0AAAAASUVORK5CYII="
+        />
         <ButtonWrapper onClick={handleClick}>
           <Image
             src="/images/logo/completeBtn.svg"
